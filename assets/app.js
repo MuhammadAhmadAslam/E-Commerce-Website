@@ -3,10 +3,11 @@ var ProductObject = { "products": [{ "id": 1, "title": "Essence Mascara Lash Pri
 
 
 var rowDiv = document.getElementById('row');
+var cartCount = 1;
 for (let i = 0; i < ProductObject.products.length; i++) {
   const product = ProductObject.products[i];
 
-  rowDiv.innerHTML += ` <div class="card col-sm-6 col-md-4 col-lg-3">
+         rowDiv.innerHTML += ` <div class="card col-sm-12 col-md-6 col-lg-3">
                   <div class="imageDiv">
                      <img src="${product.images[0]}" alt="img" id='img'>
                      <hr>
@@ -23,10 +24,55 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                   <div class="priceDiv">
                      <p id="price"><strong>PRICE : ${product.price} $</strong></p>
                   </div>
+                  <div class='buttonDiv' id='buttonDiv'>
+                     <button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>
                </div>`
+               document.querySelectorAll('.cartBtn').forEach((button, index) => {
+                  button.addEventListener('click', function() {
+                    // Get the product index from the data-index attribute
+                    var index = this.getAttribute('data-index');
+                    // Increment the cart count for this product
+                    ProductObject.products[index].cartCount++;
+                    // Update the localStorage
+                    localStorage.setItem(ProductObject.products[index].title, ProductObject.products[index].cartCount);
+                
+                    // Replace the button with increment/decrement buttons
+                    var buttonDiv = this.parentElement;
+                    buttonDiv.innerHTML = `
+                      <button id='increment'>+</button>
+                      <p id='counterP'>${ProductObject.products[index].cartCount}</p>
+                      <button id='decrement'>-</button>`;
+                
+                    // Add event listeners for the increment and decrement buttons
+                    buttonDiv.querySelector('#increment').addEventListener('click', function() {
+                      ProductObject.products[index].cartCount++;
+                      localStorage.setItem(ProductObject.products[index].title, ProductObject.products[index].cartCount);
+                      buttonDiv.querySelector('#counterP').textContent = ProductObject.products[index].cartCount;
+                    });
+                
+                    buttonDiv.querySelector('#decrement').addEventListener('click', function() {
+                      if (ProductObject.products[index].cartCount > 0) {
+                        ProductObject.products[index].cartCount--;
+                        localStorage.setItem(ProductObject.products[index].title, ProductObject.products[index].cartCount);
+                        buttonDiv.querySelector('#counterP').textContent = ProductObject.products[index].cartCount;
+                      }
+                    });
+                  });
+                });
+               // var cartBtn = document.querySelectorAll('.cartBtn')
+               // var buttonDiv = document.querySelectorAll('.buttonDiv')
+               // var counter = 1
+               // cartBtn.forEach((button,index)=> {
+               //    button.addEventListener('click' , () => {
+               //       localStorage.setItem(ProductObject.products[index].title , 1)
+               //       console.log(ProductObject.products[index].title);
+               //       buttonDiv.innerHTML = `<button id='increment'>+</button><p id='counterP'> ${counter}</p> <button id='decrement'>-</button>`
+               //    })
+               // })
 }
 
-console.log(ProductObject);
+
+
 // NAV BAR WORK START HERE NAV BAR WORK START HERE NAV BAR WORK START HERE NAV BAR WORK START HERE
 
 const menuBtn = document.querySelector(".menu-icon span");
