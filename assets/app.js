@@ -95,6 +95,28 @@ function searching() {
 // search bar works ended here search bar works ended here search bar works ended here search bar works ended here 
 
 
+// dropdown works started here dropdown works started here dropdown works started here 
+console.log(ProductObject);
+var dropdownArray = []
+var select = document.getElementById('select')
+for (const x of ProductObject.products) {
+    if (!dropdownArray.includes(x.category)) {
+      select.innerHTML += `<option>${x.category}</option><br>`
+      dropdownArray.unshift(x.category)
+    }else{
+      console.log(false );
+    }
+}
+console.log(dropdownArray);
+
+// dropdown works ended here dropdown works ended here dropdown works ended here dropdown works ended here  
+
+
+
+
+
+
+
 // NAV BAR WORK START HERE NAV BAR WORK START HERE NAV BAR WORK START HERE NAV BAR WORK START HERE
 
 const menuBtn = document.querySelector(".menu-icon span");

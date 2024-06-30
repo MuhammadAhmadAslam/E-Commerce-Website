@@ -31,8 +31,10 @@ nav .nav-items{
   padding: 0 0 0 40px;
 }
 select{
-    background-color: transparent;
+    background-color: #171c24;
     color: white;
+    width: 170px;
+    height: 30px;
 }
 input::placeholder{
   color: white;
