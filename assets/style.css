@@ -5,27 +5,38 @@
   outline: none;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
-  /* border: 1px solid black; */
+  /* border: 1px solid white; */
 }
 nav{
   background: #171c24;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 70px;
-  padding: 0 100px;
+  /* padding: 0 100px; */
 }
 nav .logo{
   color: #fff;
   font-size: 30px;
-  font-weight: 600;
+  font-weight: bolder !important;
   letter-spacing: -1px;
+  /* padding-right: 80px; */
 }
 nav .nav-items{
   display: flex;
   flex: 1;
+  justify-content: flex-end;
+  /* width: 20%; */
   padding: 0 0 0 40px;
+}
+select{
+    background-color: transparent;
+    color: white;
+}
+input::placeholder{
+  color: white;
+  font-weight: bolder;
 }
 nav .nav-items li{
   list-style: none;
@@ -44,6 +55,7 @@ nav form{
   display: flex;
   height: 40px;
   padding: 2px;
+  margin-left: 190px;
   background: #1e232b;
   min-width: 18%!important;
   border-radius: 2px;
@@ -289,6 +301,7 @@ nav .logo.space{
   justify-content: center;
   align-items: center;
   width: 100%;
+
 }
 .card{
       margin: 25px !important;
@@ -350,4 +363,7 @@ nav .logo.space{
 #counterP{
     padding-top: 2px;
     font-size: 30px;
+}
+.cardsnaheMilaye{
+      display: none;
 }
