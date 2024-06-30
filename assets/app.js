@@ -9,7 +9,7 @@ var rowDiv = document.getElementById('row');
 for (let i = 0; i < ProductObject.products.length; i++) {
 
   const product = ProductObject.products[i];
-     
+
   rowDiv.innerHTML += ` <div class="card col-sm-12 col-md-6 col-lg-3">
                   <div class="imageDiv">
                      <img src="${product.images[0]}" alt="img" id='img'>
@@ -18,18 +18,22 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                   <div class="title">
                      <strong>${product.title}</strong>
                   </div>
-                  <div class="brand">
-                     <strong>Brand : ${product.brand}</strong>
-                  </div>
                   <div class="category">
                      <strong>Category : ${product.category}</strong>
                   </div>
                   <div class="priceDiv">
                      <p id="price"><strong>PRICE : ${product.price} $</strong></p>
                   </div>
+                  <div class="brand">
+                     <strong>Return Policy : ${product.returnPolicy}</strong>
+                  </div>
                   <div class='buttonDiv' id='buttonDiv'>
                      <button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>
                </div>`
+
+               let cards = document.querySelectorAll('.card')
+
+
   var cartBtn = document.querySelectorAll('.cartBtn')
   cartBtn.forEach((button, index) => {
     button.addEventListener('click', function () {
@@ -42,7 +46,7 @@ for (let i = 0; i < ProductObject.products.length; i++) {
       <button id='increment'>+</button>
       <p id='counterP'>${ProductObject.products[index].cartCount}</p>
       <button id='decrement'>-</button>
-    `;
+    `
 
       buttonDiv.querySelector('#increment').addEventListener('click', function () {
         ProductObject.products[index].cartCount++;
@@ -76,19 +80,19 @@ var title = document.querySelectorAll('.title');
 searchbar.addEventListener('input', searching);
 
 function searching() {
-    var search = searchbar.value.toLowerCase()
-    for (let i = 0; i < title.length; i++) {
-        var titles = title[i].innerText.toLowerCase()
-      if (titles.includes(search)) {
-        // console.log('mil gaya');
-        card[i].classList.add('card')
-        card[i].classList.remove('cardsnaheMilaye')
-      }else{
-        // console.log('nahe mila');
-        card[i].classList.remove('card')
-        card[i].classList.add('cardsnaheMilaye')
-      }
+  var search = searchbar.value.toLowerCase()
+  for (let i = 0; i < title.length; i++) {
+    var titles = title[i].innerText.toLowerCase()
+    if (titles.includes(search)) {
+      // console.log('mil gaya');
+      card[i].classList.add('card')
+      card[i].classList.remove('cardsnaheMilaye')
+    } else {
+      // console.log('nahe mila');
+      card[i].classList.remove('card')
+      card[i].classList.add('cardsnaheMilaye')
     }
+  }
 }
 
 
@@ -100,14 +104,28 @@ console.log(ProductObject);
 var dropdownArray = []
 var select = document.getElementById('select')
 for (const x of ProductObject.products) {
-    if (!dropdownArray.includes(x.category)) {
-      select.innerHTML += `<option>${x.category}</option><br>`
-      dropdownArray.unshift(x.category)
-    }else{
-      console.log(false );
-    }
+  if (!dropdownArray.includes(x.category)) {
+    select.innerHTML += `<option>${x.category}</option><br>`
+    dropdownArray.unshift(x.category)
+  } else {
+    // rowDiv.innerHTML = `NO PRODUCT FOUND`
+  }
 }
-console.log(dropdownArray);
+var categories = document.querySelectorAll('.category')
+function dropwala() {
+  for (let i = 0; i < categories.length; i++) {
+    if (categories[i].innerText.includes(select.value)) {
+      card[i].classList.add('card')
+      card[i].classList.remove('cardsnaheMilaye')
+    } else {
+      card[i].classList.remove('card')
+      card[i].classList.add('cardsnaheMilaye')
+    }
+
+  }
+}
+
+select.addEventListener('click', dropwala)
 
 // dropdown works ended here dropdown works ended here dropdown works ended here dropdown works ended here  
 
@@ -145,3 +163,27 @@ searchBtn.onclick = () => {
 }
 
 // NAV BAR WORK ENDED HERE NAV BAR WORK ENDED HERE NAV BAR WORK ENDED HERE NAV BAR WORK ENDED HERE NAV BAR WORK ENDED HERE
+
+
+
+// let cards = document.querySelectorAll('.card')
+
+// cards.forEach((cardss, index) => {
+//   cardss.addEventListener('click', () => {
+//     rowDiv.innerHTML = ``
+//     rowDiv.classList.add('container')
+//     rowDiv.classList.remove('row')
+//     rowDiv.innerHTML = `
+//       <div class='fullscreen'>
+//         <div class="img">
+//           <img src="${ProductObject.products[index].images}" alt="" id='fullimage'>
+//       </div>
+//         <div class="title">
+//           <h6 id="fullTitle">${ProductObject.products[index].title}</h6>
+//       </div>
+//         <div class="price">
+//           <p id="fullPrice">${ProductObject.products[index].price} $</p>
+//       </div>
+//     </div>`
+//   })
+// })
