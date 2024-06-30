@@ -33,8 +33,15 @@ nav .nav-items{
 select{
     background-color: #171c24;
     color: white;
-    width: 170px;
+    width: 120px;
     height: 30px;
+    border: none;
+    margin-bottom: 25px;
+}
+option{
+    padding: 20px !important;
+    border: 1px solid rebeccapurple;
+    height: 100px !important;
 }
 input::placeholder{
   color: white;
