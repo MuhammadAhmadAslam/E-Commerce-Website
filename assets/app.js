@@ -11,6 +11,7 @@ for (let i = 0; i < ProductObject.products.length; i++) {
   const product = ProductObject.products[i];
 
   rowDiv.innerHTML += ` <div class="card col-sm-12 col-md-6 col-lg-3">
+                  <div class='cardChild'>
                   <div class="imageDiv">
                      <img src="${product.images[0]}" alt="img" id='img'>
                      <hr>
@@ -27,13 +28,15 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                   <div class="brand">
                      <strong>Return Policy : ${product.returnPolicy}</strong>
                   </div>
+                  </div>
                   <div class='buttonDiv' id='buttonDiv'>
                      <button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>
+               </div>
                </div>`
 
                let cards = document.querySelectorAll('.card')
 
-
+// function cartBtnPressed(){
   var cartBtn = document.querySelectorAll('.cartBtn')
   cartBtn.forEach((button, index) => {
     button.addEventListener('click', function () {
@@ -68,6 +71,7 @@ for (let i = 0; i < ProductObject.products.length; i++) {
     });
   });
 }
+// }
 
 // button works ended here button works ended here button works ended here button works ended here
 
@@ -166,24 +170,13 @@ searchBtn.onclick = () => {
 
 
 
-// let cards = document.querySelectorAll('.card')
+let cardChild = document.querySelectorAll('.cardChild')
 
-// cards.forEach((cardss, index) => {
-//   cardss.addEventListener('click', () => {
-//     rowDiv.innerHTML = ``
-//     rowDiv.classList.add('container')
-//     rowDiv.classList.remove('row')
-//     rowDiv.innerHTML = `
-//       <div class='fullscreen'>
-//         <div class="img">
-//           <img src="${ProductObject.products[index].images}" alt="" id='fullimage'>
-//       </div>
-//         <div class="title">
-//           <h6 id="fullTitle">${ProductObject.products[index].title}</h6>
-//       </div>
-//         <div class="price">
-//           <p id="fullPrice">${ProductObject.products[index].price} $</p>
-//       </div>
-//     </div>`
-//   })
-// })
+cardChild.forEach((cardss, index) => {
+  cardss.addEventListener('click', (e) => {
+    window.open('assets/fullscreen.html')
+    localStorage.setItem('Click Item' , ProductObject.products[index].title);
+    localStorage.setItem('Index Number', index)
+    e.preventDefault();
+  })
+})
