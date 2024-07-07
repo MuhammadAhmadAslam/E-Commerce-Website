@@ -4,11 +4,23 @@ var ProductObject = { "products": [{ "id": 1, "title": "Essence Mascara Lash Pri
 
 
 // button works started here button works started here button works started here button works started here
-
 var rowDiv = document.getElementById('row');
-for (let i = 0; i < ProductObject.products.length; i++) {
 
+for (let i = 0; i < ProductObject.products.length; i++) {
   const product = ProductObject.products[i];
+
+  // Check if the product is already in the cart
+  const cartCount = localStorage.getItem(product.title);
+  let buttonHtml;
+  if (cartCount) {
+    buttonHtml = `
+      <button id='increment'>+</button>
+      <p id='counterP'>${cartCount}</p>
+      <button id='decrement'>-</button>
+    `;
+  } else {
+    buttonHtml = `<button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>`;
+  }
 
   rowDiv.innerHTML += ` <div class="card col-sm-12 col-md-6 col-lg-3">
                   <div class='cardChild'>
@@ -30,13 +42,35 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                   </div>
                   </div>
                   <div class='buttonDiv' id='buttonDiv'>
-                     <button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>
+                     ${buttonHtml}
                </div>
                </div>`
 
-               let cards = document.querySelectorAll('.card')
+  // Add event listeners for the increment and decrement buttons
+  if (cartCount) {
+    const buttonDiv = document.querySelectorAll('.buttonDiv')[i];
+    buttonDiv.querySelector('#increment').addEventListener('click', function () {
+      ProductObject.products[i].cartCount++;
+      localStorage.setItem(product.title, ProductObject.products[i].cartCount);
+      buttonDiv.querySelector('#counterP').textContent = ProductObject.products[i].cartCount;
+    });
 
-// function cartBtnPressed(){
+    buttonDiv.querySelector('#decrement').addEventListener('click', function () {
+      if (ProductObject.products[i].cartCount > 1) {
+        ProductObject.products[i].cartCount--;
+        localStorage.setItem(product.title, ProductObject.products[i].cartCount);
+        buttonDiv.querySelector('#counterP').textContent = ProductObject.products[i].cartCount;
+      } else {
+        buttonDiv.innerHTML = `<button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>`
+        ProductObject.products[i].cartCount--;
+        localStorage.removeItem(product.title, ProductObject.products[i].cartCount);
+      }
+    });
+  }
+}
+
+// Add event listener for the "Add to Cart" button
+function cartBtnPressed() {
   var cartBtn = document.querySelectorAll('.cartBtn')
   cartBtn.forEach((button, index) => {
     button.addEventListener('click', function () {
@@ -63,7 +97,7 @@ for (let i = 0; i < ProductObject.products.length; i++) {
           localStorage.setItem(ProductObject.products[index].title, ProductObject.products[index].cartCount);
           buttonDiv.querySelector('#counterP').textContent = ProductObject.products[index].cartCount;
         } else {
-          buttonDiv.innerHTML = `<button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>`
+          buttonDiv.innerHTML = `<button id='cartBtn' class='cartBtn' data-index='${index}'>Add To Cart</button>`
           ProductObject.products[index].cartCount--;
           localStorage.removeItem(ProductObject.products[index].title, ProductObject.products[index].cartCount);
         }
@@ -71,6 +105,74 @@ for (let i = 0; i < ProductObject.products.length; i++) {
     });
   });
 }
+cartBtnPressed();
+// var rowDiv = document.getElementById('row');
+// for (let i = 0; i < ProductObject.products.length; i++) {
+
+//   const product = ProductObject.products[i];
+
+//   rowDiv.innerHTML += ` <div class="card col-sm-12 col-md-6 col-lg-3">
+//                   <div class='cardChild'>
+//                   <div class="imageDiv">
+//                      <img src="${product.images[0]}" alt="img" id='img'>
+//                      <hr>
+//                   </div>
+//                   <div class="title">
+//                      <strong>${product.title}</strong>
+//                   </div>
+//                   <div class="category">
+//                      <strong>Category : ${product.category}</strong>
+//                   </div>
+//                   <div class="priceDiv">
+//                      <p id="price"><strong>PRICE : ${product.price} $</strong></p>
+//                   </div>
+//                   <div class="brand">
+//                      <strong>Return Policy : ${product.returnPolicy}</strong>
+//                   </div>
+//                   </div>
+//                   <div class='buttonDiv' id='buttonDiv'>
+//                      <button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>
+//                </div>
+//                </div>`
+
+//                let cards = document.querySelectorAll('.card')
+
+               
+// function cartBtnPressed(){
+//   var cartBtn = document.querySelectorAll('.cartBtn')
+//   cartBtn.forEach((button, index) => {
+//     button.addEventListener('click', function () {
+//       var index = this.getAttribute('data-index');
+//       ProductObject.products[index].cartCount = (ProductObject.products[index].cartCount || 0) + 1;
+//       localStorage.setItem(ProductObject.products[index].title, ProductObject.products[index].cartCount);
+
+//       var buttonDiv = this.parentElement;
+//       buttonDiv.innerHTML = `
+//       <button id='increment'>+</button>
+//       <p id='counterP'>${ProductObject.products[index].cartCount}</p>
+//       <button id='decrement'>-</button>
+//     `
+
+//       buttonDiv.querySelector('#increment').addEventListener('click', function () {
+//         ProductObject.products[index].cartCount++;
+//         localStorage.setItem(ProductObject.products[index].title, ProductObject.products[index].cartCount);
+//         buttonDiv.querySelector('#counterP').textContent = ProductObject.products[index].cartCount;
+//       });
+
+//       buttonDiv.querySelector('#decrement').addEventListener('click', function () {
+//         if (ProductObject.products[index].cartCount > 1) {
+//           ProductObject.products[index].cartCount--;
+//           localStorage.setItem(ProductObject.products[index].title, ProductObject.products[index].cartCount);
+//           buttonDiv.querySelector('#counterP').textContent = ProductObject.products[index].cartCount;
+//         } else {
+//           buttonDiv.innerHTML = `<button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>`
+//           ProductObject.products[index].cartCount--;
+//           localStorage.removeItem(ProductObject.products[index].title, ProductObject.products[index].cartCount);
+//         }
+//       });
+//     });
+//   });
+// }
 // }
 
 // button works ended here button works ended here button works ended here button works ended here

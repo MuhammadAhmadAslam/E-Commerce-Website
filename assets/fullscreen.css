@@ -7,6 +7,9 @@
   font-family: 'Montserrat', sans-serif;
   /* border: 1px solid white; */
 }
+body{
+    margin-bottom: 150px !important;
+}
 nav{
   background: #171c24;
   display: flex;
@@ -263,11 +266,8 @@ nav .logo.space{
 .content .space{
   margin: 10px 0;
 }
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+.main{
+    margin-top: 20px;
 }
 #imagediv{
   /* border: 1px solid black; */
@@ -290,6 +290,9 @@ nav .logo.space{
           padding-left: 0px;
           padding-right: 0px;
       }
+}
+h3,h4,h5{
+    font-weight: bolder;
 }
 #description{
     font-size: 20px;
@@ -318,4 +321,43 @@ nav .logo.space{
 }
 .userReview{
     margin-top: 8px;
+}
+#save{
+    margin-top: 30px;
+}
+details{
+    font-size: 35px;
+}
+ul{
+    font-size: 20px;
+    font-weight: 500;
+}
+#qrcode{
+    width: 180px;
+    height: 180px;
+    margin-bottom: 50px;
+}
+@media screen and (min-width: 0px) and (max-width: 600px) {
+  ul{
+      font-size: 12px;
+  }
+}
+.buttonDiv{
+      position: fixed;
+      bottom: 0%;
+      width: 100%;
+      background-color: #171c24;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+}
+.btn{
+    width: 170px !important;
+    height: 40px !important;
+    background-color: #e63600 !important;
+    color: white !important;
+    border: none !important;
+    margin-left: 60px !important;
 }

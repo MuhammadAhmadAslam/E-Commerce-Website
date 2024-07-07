@@ -68,8 +68,9 @@ main.innerHTML = `<div id="imagediv" class='container'>
 </div>
 </details>
    <div id="qrcodeDiv">
-   <p>Save This QR Code For This Product Further Use</p>
-      <img src="${ProductObject.products[indexNumber].meta.qrCode}" alt="" id="qrcode">
+   <p id='save'><strong>Save This QR Code For This Product Further Use</strong>
+   </p>   
+   <img src="${ProductObject.products[indexNumber].meta.qrCode}" alt="" id="qrcode">
    </div>
    <div class="reviewBox">
 </div>`;
@@ -100,3 +101,9 @@ for (let i = 0; i < reviewBox.length; i++) {
   }
 }
 
+
+var view = document.getElementById('view')
+view.addEventListener('click' , () => {
+      // window.open('cart.html')
+      window.location.href = 'cart.html'
+})
