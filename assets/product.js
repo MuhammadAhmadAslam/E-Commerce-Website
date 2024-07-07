@@ -27,12 +27,12 @@ var clickItem = localStorage.getItem('Click Item')
 var indexNumber = localStorage.getItem('Index Number');
 var main = document.getElementById('main')
 console.log(ProductObject.products[indexNumber]);
-main.innerHTML = `<div id="imagediv">
+main.innerHTML = `<div id="imagediv" class='container'>
         <img src="${ProductObject.products[indexNumber].images}" alt="" id="productImage">
-        <hr />
     </div>
+      <hr />
     <div id="title">
-        <h3>${ProductObject.products[indexNumber].title}</h3>
+        <h3>${ProductObject.products[indexNumber].title} ( ${ProductObject.products[indexNumber].availabilityStatus} )</h3>
     </div>
      <div id="price">
         <strong><h4 id="priceTag">${ProductObject.products[indexNumber].price} $ Discounted Percentage <span id="discountPrice">${ProductObject.products[indexNumber].discountPercentage} % </span></h4></strong>
@@ -46,4 +46,57 @@ main.innerHTML = `<div id="imagediv">
     <div id="description">
         <h5>Description</h5>
       <p id='description'>${ProductObject.products[indexNumber].description}</p>
-    </div>`
+    </div>
+    <div id="rating">
+      <p id="ratings"><i class="fa-solid fa-star" style="color: #FFD43B;"></i>${ProductObject.products[indexNumber].rating} Ratings</p>
+   </div>
+   <details>
+<div class="manufacturingDetails">
+   <h1>Product Details</h1>
+   <ul>
+      <li>Created At : ${ProductObject.products[indexNumber].meta.createdAt}</li>
+      <li>Updated At : ${ProductObject.products[indexNumber].meta.updatedAt}</li>
+      <li>Width : ${ProductObject.products[indexNumber].dimensions.width} cm</li>
+      <li>Height : ${ProductObject.products[indexNumber].dimensions.height} cm</li>
+      <li>Minimum Order Quantity : ${ProductObject.products[indexNumber].minimumOrderQuantity}</li>
+      <li>Return Policy : ${ProductObject.products[indexNumber].returnPolicy}</li>
+      <li>Shipping Infromation : ${ProductObject.products[indexNumber].shippingInformation}</li>
+      <li>Stock : ${ProductObject.products[indexNumber].stock}</li>
+      <li>ID : ${ProductObject.products[indexNumber].id}</li>
+      <li>Warranty Information : ${ProductObject.products[indexNumber].warrantyInformation}</li>
+   </ul>
+</div>
+</details>
+   <div id="qrcodeDiv">
+   <p>Save This QR Code For This Product Further Use</p>
+      <img src="${ProductObject.products[indexNumber].meta.qrCode}" alt="" id="qrcode">
+   </div>
+   <div class="reviewBox">
+</div>`;
+var reviewBox = document.querySelectorAll('.reviewBox')
+
+for (let i = 0; i < reviewBox.length; i++) {
+  reviewBox[i].innerHTML = '';
+  for (const x of ProductObject.products[indexNumber].reviews) {
+    reviewBox[i].innerHTML += `<div class="reviews">
+     <div class="m1">
+     <div class="usericon">
+        <i class="fa-solid fa-user" style="font-size: 2.5em;"></i>
+     </div>
+     <div class="userName">
+        <h3 id="userName">${x.reviewerName}</h3>
+     </div>
+  </div>
+  <div class="userReview">
+     <p>${x.comment}</p>
+  </div>
+  <div class="reviewEmail">
+     <p id='email'>Reviewer Email : ${x.reviewerEmail} </p>
+  </div>
+  <div class="date">
+     <p>Date : ${x.date}</p>
+  </div>
+  </div>`
+  }
+}
+
