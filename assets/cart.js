@@ -22,79 +22,31 @@ searchBtn.onclick = () => {
   searchBtn.classList.add("hide");
   cancelBtn.classList.add("show");
 }
-
-let cartProducts = {};
-
-// Loop through all local storage items
+// var cartTable = document.getElementById('cartTable')
+// for (let i = 0; i < localStorage.length; i++) {
+//   var storedArray = localStorage.key(i)
+//   let key = localStorage.key(i);
+//   if (key.startsWith(`Product-`)) {
+//     console.log(true);
+//     const parsedArray = JSON.parse(storedArray);
+//   console.log(parsedArray[0]); // outputs the title
+//   console.log(parsedArray[1]); // outputs the index
+//   console.log(parsedArray[2]); // outputs the images
+//   console.log(parsedArray[3]);
+//     cartTable.innerHTML += `<tr>
+//     <td>${localStorage.getItem(key[0])}</td>`
+//   }
+// }
+var cartTable = document.getElementById('cartTable');
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
-  if (key.startsWith('product-')) {
-    let productData = JSON.parse(localStorage.getItem(key));
-    cartProducts[productData.index] = productData.title;
+  if (key.startsWith('Product-')) {
+    console.log(localStorage.getItem(key));
+    
+    cartTable.innerHTML += `<tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>`;
   }
 }
-
-// Print the cart products in a table
-// let cartTable = document.getElementById('cartTable');
-// let tableBody = cartTable.tBodies[0];
-// for (let index in cartProducts) {
-//     let num = 1
-//     tableBody.innerHTML += `
-//       <tr>
-//         <td>${cartProducts[index]}</td>
-//         <td><button id='inc' class='inc'>+</button> <p id='cartNumber' class='cartNumber'>${num}</p><button id='dec'>-</button></td>
-//       </tr>
-//     `;
-//     let cartNumber = document.querySelectorAll('.cartNumber')
-//     let inc = document.querySelectorAll('.inc')
-//     inc.forEach((btn , index)=>{
-//         btn.addEventListener('click' , ()=>{
-//             console.log(index);
-//             console.log(true);
-//             cartNumber[index].innerHTML = num++
-//         })
-//     })
-    
-// }
-let cartTable = document.getElementById('cartTable');
-let tableBody = cartTable.tBodies[0];
-
-for (let index in cartProducts) {
-  tableBody.innerHTML += `
-    <tr>
-      <td>${cartProducts[index]}</td>
-      <td><button class='inc'>+</button> <p class='cartNumber'>1</p><button>-</button></td>
-    </tr>
-  `;
-}
-
-let cartNumber = document.querySelectorAll('.cartNumber');
-let incButtons = document.querySelectorAll('.inc');
-
-for (let i = 0; i < incButtons.length; i++) {
-  incButtons[i].addEventListener('click', () => {
-    let currentValue = parseInt(cartNumber[i].innerHTML);
-    cartNumber[i].innerHTML = currentValue + 1;
-  });
-}
-// let cartTable = document.getElementById('cartTable');
-// let tableBody = cartTable.getElementsByTagName('tbody')[0];
-// let numArray = [];
-
-// cartProducts.forEach((product, index) => {
-//   numArray.push(1);
-//   tableBody.innerHTML += `
-//     <tr>
-//       <td>${product}</td>
-//       <td><button class='inc'>+</button> <p class='cartNumber'>${numArray[index]}</p><button>-</button></td>
-//     </tr>
-//   `;
-// });
-
-// let cartNumber = document.querySelectorAll('.cartNumber')
-// let inc = document.querySelectorAll('.inc')
-// inc.forEach((btn, index) => {
-//   btn.addEventListener('click', () => {
-//     cartNumber[index].innerHTML = ++numArray[index];
-//   })
-// })

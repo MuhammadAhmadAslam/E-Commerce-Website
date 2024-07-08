@@ -32,37 +32,28 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                </div>
                </div>`
 
-                // let cartBtn = document.querySelectorAll('.cartBtn')
-                // cartBtn.forEach((button , index) => {
-                //     button.addEventListener('click' , ()=>{
-                //         button.innerText = 'View Cart'
-                //         if (button.innerText == 'View Cart') {
-                //           localStorage.setItem('Products',ProductObject.products[index].title)
-                //           window.location.href ='assets/cart.html';
-                         
-                //         }
-                //     })
-                // })
-
+// localStorage.clear()
                 let cartBtn = document.querySelectorAll('.cartBtn');
                 let products = ProductObject.products;
                 
                 cartBtn.forEach((button, index) => {
                   button.addEventListener('click', () => {
-                    let productTitle = products[index].title;
-                    let productIndex = index;
-                
-                    // Create a unique key for each product in local storage
-                    let key = `product-${productIndex}`;
-                
-                    // Store the product title and index in local storage
-                    localStorage.setItem(key, JSON.stringify({ title: productTitle, index: productIndex }));
-                
-                    // Update the button text
-                    button.innerText = 'View Cart';
-                
-                    // Redirect to cart page
-                    window.location.href = 'assets/cart.html';
+                      // localStorage.setItem(`Product-${index}`, [ProductObject.products[index].title , index , ProductObject.products[index].images , ProductObject.products[index].price])
+                      localStorage.setItem(`Product-${index}`, JSON.stringify([
+                        ProductObject.products[index].title,
+                        index,
+                        ProductObject.products[index].images,
+                        ProductObject.products[index].price
+                      ]));
+                      button.innerText = 'View Cart'
+                      var notify = document.getElementById('notify')
+                      var div = document.createElement('div')
+                      div.classList.add('div')
+                      notify.appendChild(div)
+                      div.innerHTML = `Product Added To Cart Successfully <img src='assets/images/tick.png' alt='tick' width='20px' height='20px'>`
+                      setTimeout(()=>[
+                          notify.removeChild(div)
+                      ],5000)
                   });
                 });
 
@@ -100,16 +91,18 @@ function searching() {
 
 
 // dropdown works started here dropdown works started here dropdown works started here 
-var dropdownArray = []
-var select = document.getElementById('select')
+var dropdownArray = [];
+var select = document.getElementById('select');
+select.innerHTML = '<option selected disabled>Products</option>'; 
 for (const x of ProductObject.products) {
   if (!dropdownArray.includes(x.category)) {
-    select.innerHTML += `<option>${x.category}</option><br>`
-    dropdownArray.unshift(x.category)
-  } else {
-    // rowDiv.innerHTML = `NO PRODUCT FOUND`
+    dropdownArray.push(x.category);
+    select.innerHTML += `<option>${x.category}</option>`;
   }
 }
+
+
+
 var categories = document.querySelectorAll('.category')
 function dropwala() {
   for (let i = 0; i < categories.length; i++) {
@@ -174,5 +167,6 @@ cardChild.forEach((cardss, index) => {
     localStorage.setItem('Index Number', index)
     e.preventDefault();
   })
+
 })
-}
+} 

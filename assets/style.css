@@ -387,3 +387,34 @@ nav .logo.space{
   width: 100%;
   height: 400px;
 }
+.div{
+  background-color: #171c24;
+  color: white;
+  width: 390px;
+  height: 50px;
+  margin-top: 20px;
+  position: relative;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  position: fixed;
+  bottom: 2%;
+  right: 0%;
+}
+.div::after{
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: #e63600;
+      width: 100%;
+      height: 4px;
+      animation: ani 6s forwards;
+      transform: all 1s forwards;
+}
+@keyframes ani {
+    100%{
+        width: 0px;
+        transition: 6s all ease-in;
+    }
+}
