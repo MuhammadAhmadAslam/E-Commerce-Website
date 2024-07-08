@@ -342,21 +342,16 @@ ul{
       font-size: 12px;
   }
 }
-.buttonDiv{
-      position: fixed;
-      bottom: 0%;
-      width: 100%;
-      background-color: #171c24;
-      height: 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      
+.inc,#dec{
+    width: 90px;
+    height: 50px;
+    background-color: #171c24;
+    color: white;
+    font-size: 40px;
 }
-.btn{
-    width: 170px !important;
-    height: 40px !important;
-    background-color: #e63600 !important;
-    color: white !important;
-    border: none !important;
+.cartNumber{
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 30px;
 }

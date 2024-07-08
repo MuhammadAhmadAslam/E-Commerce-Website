@@ -91,9 +91,6 @@ for (let i = 0; i < reviewBox.length; i++) {
   <div class="userReview">
      <p>${x.comment}</p>
   </div>
-  <div class="reviewEmail">
-     <p id='email'>Reviewer Email : ${x.reviewerEmail} </p>
-  </div>
   <div class="date">
      <p>Date : ${x.date}</p>
   </div>
@@ -102,8 +99,11 @@ for (let i = 0; i < reviewBox.length; i++) {
 }
 
 
-var view = document.getElementById('view')
+var view = document.getElementById('btn')
 view.addEventListener('click' , () => {
-      // window.open('cart.html')
-      window.location.href = 'cart.html'
+      window.open('cart.html')
 })
+
+
+let title = document.getElementById('title')
+title.innerText += `  ( ${ProductObject.products[indexNumber].title})`

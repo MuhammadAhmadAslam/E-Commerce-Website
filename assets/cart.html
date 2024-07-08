@@ -3,11 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cart</title>
+    <link rel="stylesheet" href="cart.css">
 </head>
 <body>
     
 
-    hello i am cart
+    <nav>
+        <div class="menu-icon">
+           <span class="fas fa-bars"></span>
+        </div>
+        <div class="logo">
+           <h5>E-Commerce Website</h5>
+        </div>
+        <form action="#">
+           <input type="search" class="search-data" id="searchbar" placeholder="Search" required>
+           <button type="submit" class="fas fa-search"></button>
+        </form>
+        
+        <div class="search-icon">
+           <span class="fas fa-search"></span>
+        </div>
+        <div class="cancel-icon">
+           <span class="fas fa-times"></span>
+        </div>
+        <div class="nav-items">
+           <li><a href="#">Home</a></li>
+           <li><select name="" id="select"><option value="" disabled selected>Products</option></select></li>
+
+           <li><a href="#">About Us</a></li>
+           <li><a href="#">Contact Us</a></li>
+           <li><a href="#">Feedback</a></li>
+        </div>
+     </nav>
+
+
+
+
+     <table id="cartTable">
+       <tr>
+        <th>Product Title</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+       </tr>
+       
+     </table>
+
+   
+
+     <script src="cart.js"></script>
 </body>
 </html>
