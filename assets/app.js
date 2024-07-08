@@ -28,8 +28,7 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                   </div>
                   </div>
                   <div class='buttonDiv' id='buttonDiv'>
-                     <button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>
-               </div>
+                     <button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>  </div>
                </div>`
 
 // localStorage.clear()
@@ -38,7 +37,7 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                 
                 cartBtn.forEach((button, index) => {
                   button.addEventListener('click', () => {
-                      // localStorage.setItem(`Product-${index}`, [ProductObject.products[index].title , index , ProductObject.products[index].images , ProductObject.products[index].price])
+                       
                       localStorage.setItem(`Product-${index}`, JSON.stringify([
                         ProductObject.products[index].title,
                         index,
