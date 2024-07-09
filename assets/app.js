@@ -57,8 +57,15 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                   });
                 });
 
-
-      
+      // if (button.innerText == 'View Cart') {
+      cartBtn.forEach((button , index)=>{
+            button.addEventListener('click', ()=>{
+                
+                    window.open('assets/cart.html')
+                
+      })
+      })
+    // }
 
 // button works ended here button works ended here button works ended here button works ended here
 

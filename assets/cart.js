@@ -22,31 +22,36 @@ searchBtn.onclick = () => {
   searchBtn.classList.add("hide");
   cancelBtn.classList.add("show");
 }
-// var cartTable = document.getElementById('cartTable')
-// for (let i = 0; i < localStorage.length; i++) {
-//   var storedArray = localStorage.key(i)
-//   let key = localStorage.key(i);
-//   if (key.startsWith(`Product-`)) {
-//     console.log(true);
-//     const parsedArray = JSON.parse(storedArray);
-//   console.log(parsedArray[0]); // outputs the title
-//   console.log(parsedArray[1]); // outputs the index
-//   console.log(parsedArray[2]); // outputs the images
-//   console.log(parsedArray[3]);
-//     cartTable.innerHTML += `<tr>
-//     <td>${localStorage.getItem(key[0])}</td>`
-//   }
-// }
+
+
 var cartTable = document.getElementById('cartTable');
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
   if (key.startsWith('Product-')) {
-    console.log(localStorage.getItem(key));
-    
+    // console.log(localStorage.getItem(key));
+    var ArrayOfProducts = JSON.parse(localStorage.getItem(key))
+    // console.log(ArrayOfProducts[2]);
     cartTable.innerHTML += `<tr>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td><img src='${ArrayOfProducts[2]}' width='20px' height='20px' alt='Product Image'> ${ArrayOfProducts[0]}</td>
+      <td class='amount' id='amount'>${ArrayOfProducts[3]} $</td>
+      <td><button class='inc' id='inc'>+</button> 1<button class='dec' id='dec'>-</button></td>
     </tr>`;
+    var inc = document.querySelectorAll('.inc')
+    inc.forEach((btn,index)=>{
+      btn.addEventListener('click', ()=>{
+        
+        
+      })
+    })
   }
 }
+var amount = document.querySelectorAll('.amount')
+var amountArray = []
+for (let i = 0; i < amount.length; i++) {
+      amountArray.push(amount[i].innerHTML)
+}
+// var totalAmount = document.getElementById('totalAmount')
+// for (let i = 0; i < amountArray.length; i++) {
+//       amountArray[i] = parseInt(amountArray[i])
+//       totalAmount.innerText += amountArray[0] + amountArray[1] 
+// }

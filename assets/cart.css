@@ -337,21 +337,49 @@ ul{
     height: 180px;
     margin-bottom: 50px;
 }
+.inc,#dec{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+}
+
 @media screen and (min-width: 0px) and (max-width: 600px) {
   ul{
       font-size: 12px;
   }
 }
 .inc,#dec{
-    width: 90px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     background-color: #171c24;
     color: white;
-    font-size: 40px;
+    font-size: 20px;
+    border: none;
 }
 .cartNumber{
     display: inline;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 30px;
+}
+td{
+    border-bottom: 1px solid black !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+table{
+    margin-top: 50px;
+    padding: 50px !important;
+}
+tr{
+    margin-top: 30px !important;
+}
+@media screen and (max-width: 400px) {
+      .inc,#dec{
+          width: 24px;
+          height: 24px;
+          font-size: 15px;
+      }
 }
