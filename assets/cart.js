@@ -23,23 +23,75 @@ searchBtn.onclick = () => {
   cancelBtn.classList.add("show");
 }
 
+// function creating(){
+// var cartTable = document.getElementById('cartTable');
+// var cartMultiplyArray = [];
+// for (let i = 0; i < localStorage.length; i++) {
+//   let key = localStorage.key(i);
+//   if (key.startsWith('Product-')) {
+//     var ArrayOfProducts = JSON.parse(localStorage.getItem(key))
+//     cartTable.innerHTML += `<tr>
+//       <td><img src='${ArrayOfProducts[2]}' width='20px' height='20px' alt='Product Image'> ${ArrayOfProducts[0]}</td>
+//       <td class='amount' id='amount'>${ArrayOfProducts[3]} $</td>
+//       <td align='center'><input type="text" maxlength="2" id="cartInput" class='cartInput' value='5'></td>
+//     </tr>`;
+//     var cartInput = document.getElementById('cartInput')
+//     cartMultiplyArray.push(cartInput.value * ArrayOfProducts[3])
+//   }
+// }
 
-var cartTable = document.getElementById('cartTable');
-for (let i = 0; i < localStorage.length; i++) {
-  let key = localStorage.key(i);
-  if (key.startsWith('Product-')) {
-    // console.log(localStorage.getItem(key));
-    var ArrayOfProducts = JSON.parse(localStorage.getItem(key))
-    // console.log(ArrayOfProducts[2]);
-    cartTable.innerHTML += `<tr>
-      <td><img src='${ArrayOfProducts[2]}' width='20px' height='20px' alt='Product Image'> ${ArrayOfProducts[0]}</td>
-      <td class='amount' id='amount'>${ArrayOfProducts[3]} $</td>
-      <td align='center'><button class='inc' id='inc' >+</button> 1<button class='dec' id='dec'>-</button></td>
-    </tr>`;
-    var inc = document.querySelectorAll('.inc')
-    var dec = document.querySelectorAll('.dec')
+// var cartInput = document.querySelectorAll('.cartInput')
+// console.log(cartInput);
+// var amount = document.querySelectorAll('.amount')
+// console.log(amount);
+// // console.log(...cartMultiplyArray);
+// for (let i = 0; i < amount.length; i++) {
+//     for (let j = 0; j < cartMultiplyArray.length; j++) {
+//       amount[i].innerText += cartMultiplyArray[j]
+      
+//     }
+  
+// }
+
+// }
+
+// creating()
+function creating(){
+  var cartTable = document.getElementById('cartTable');
+  var cartMultiplyArray = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    if (key.startsWith('Product-')) {
+      var ArrayOfProducts = JSON.parse(localStorage.getItem(key))
+      cartTable.innerHTML += `<tr>
+        <td><img src='${ArrayOfProducts[2]}' width='20px' height='20px' alt='Product Image'> ${ArrayOfProducts[0]}</td>
+        <td class='amount'>${ArrayOfProducts[3]} $</td>
+        <td align='center'><input type="text" maxlength="2" id='cartInput' class='cartInput' value='1'></td>
+      </tr>`;
+      var cartInput = document.getElementById('cartInput')
+      cartMultiplyArray.push(cartInput.value * ArrayOfProducts[3]); 
+    }
   }
+
+  var cartInputs = document.querySelectorAll('.cartInput');
+  var amounts = document.querySelectorAll('.amount');
+
+  cartInputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+      cartMultiplyArray[index] = input.value * ArrayOfProducts[3];
+      updateAmounts();
+    });
+  });
+
+  function updateAmounts() {
+    amounts.forEach((amount, index) => {
+      amount.innerText = `${cartMultiplyArray[index]} $`;
+    });
+  }
+
+  updateAmounts();
 }
+creating()
 var amount = document.querySelectorAll('.amount')
 var amountArray = []
 for (let i = 0; i < amount.length; i++) {

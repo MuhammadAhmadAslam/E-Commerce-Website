@@ -394,3 +394,6 @@ tr{
 i:hover{
   color: #ff3d00 !important;
 }
+#cartInput{
+  width: 50px !important;
+}
