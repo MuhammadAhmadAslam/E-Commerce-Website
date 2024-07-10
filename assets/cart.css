@@ -394,6 +394,8 @@ tr{
 i:hover{
   color: #ff3d00 !important;
 }
-#cartInput{
-  width: 50px !important;
+.cartInput{
+  width: 70px !important;
+  padding-left: 10px;
+  font-family: 'Times New Roman', Times, serif;
 }
