@@ -33,8 +33,8 @@ nav .nav-items{
 select{
     background-color: #171c24;
     color: white;
-    width: 120px;
-    padding: 0 1em 0 0;
+    width: 160px;
+    /* padding: 0 1em 0 0; */
     font-size: 20px !important;
     height: 20px;
     border: none;
@@ -398,7 +398,7 @@ nav .logo.space{
   background-color: #171c24;
   color: white;
   width: 390px;
-  height: 50px;
+  height: 70px;
   margin-top: 20px;
   position: relative;
   padding-bottom: 10px;
@@ -423,6 +423,16 @@ nav .logo.space{
     100%{
         width: 0px;
         transition: 6s all ease-in;
+    }
+}
+@media screen and (max-width: 400px) {
+      .div{
+          width: 100%;
+      }
+}
+@media screen and (max-width: 270px) {
+    .div{
+        height: 90px;
     }
 }
 .cartInNav{

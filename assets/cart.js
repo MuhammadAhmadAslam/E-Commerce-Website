@@ -34,15 +34,10 @@ for (let i = 0; i < localStorage.length; i++) {
     cartTable.innerHTML += `<tr>
       <td><img src='${ArrayOfProducts[2]}' width='20px' height='20px' alt='Product Image'> ${ArrayOfProducts[0]}</td>
       <td class='amount' id='amount'>${ArrayOfProducts[3]} $</td>
-      <td align='center'><button class='inc' id='inc'>+</button> 1<button class='dec' id='dec'>-</button></td>
+      <td align='center'><button class='inc' id='inc' >+</button> 1<button class='dec' id='dec'>-</button></td>
     </tr>`;
     var inc = document.querySelectorAll('.inc')
-    inc.forEach((btn,index)=>{
-      btn.addEventListener('click', ()=>{
-        
-        
-      })
-    })
+    var dec = document.querySelectorAll('.dec')
   }
 }
 var amount = document.querySelectorAll('.amount')

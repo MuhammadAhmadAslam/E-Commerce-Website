@@ -31,7 +31,8 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                      <button id='cartBtn' class='cartBtn' data-index='${i}'>Add To Cart</button>  </div>
                </div>`
 
-// localStorage.clear()
+                var audio = new Audio('assets/audio/Cart Sound.mp3');
+
                 let cartBtn = document.querySelectorAll('.cartBtn');
                 let products = ProductObject.products;
                 
@@ -45,13 +46,14 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                         ProductObject.products[index].price
                       ]));
                       button.innerHTML = `Added To Cart <i class="fa-regular fa-circle-check"></i>`
+                      audio.play()
                       button.classList.add('cartBtnKaDost')
                       button.classList.remove('cartBtn')
                       var notify = document.getElementById('notify')
                       var div = document.createElement('div')
                       div.classList.add('div')
                       notify.appendChild(div)
-                      div.innerHTML = `Product Added To Cart Successfully <img src='assets/images/tick.png' alt='tick' width='20px' height='20px'>`
+                      div.innerHTML = `Product Added To Cart Successfully Please View Your Cart<img src='assets/images/tick.png' alt='tick' width='20px' height='20px'>`
                       setTimeout(()=>[
                           notify.removeChild(div)
                       ],5000)
@@ -97,7 +99,7 @@ function searching() {
 // dropdown works started here dropdown works started here dropdown works started here 
 var dropdownArray = [];
 var select = document.getElementById('select');
-select.innerHTML = '<option selected disabled>Products</option>'; 
+select.innerHTML = '<option selected disabled>Products</option><option value="All Products">All Products</option>'; 
 for (const x of ProductObject.products) {
   if (!dropdownArray.includes(x.category)) {
     dropdownArray.push(x.category);
@@ -113,7 +115,11 @@ function dropwala() {
     if (categories[i].innerText.includes(select.value)) {
       card[i].classList.add('card')
       card[i].classList.remove('cardsnaheMilaye')
-    } else {
+    }else if(select.value == 'All Products'){
+      card[i].classList.add('card')
+      card[i].classList.remove('cardsnaheMilaye')
+    } 
+    else {
       card[i].classList.remove('card')
       card[i].classList.add('cardsnaheMilaye')
     }
@@ -175,12 +181,17 @@ cardChild.forEach((cardss, index) => {
 })
 } 
 
+function CartKaNumber(){
 
-let icon = document.getElementById('icon')
-let num = 1
-for (let i = 0; i < localStorage.length; i++) {
-  let key = localStorage.key(i);
-  if (key.startsWith('Product-')) {
+  let icon = document.getElementById('icon')
+  let num = 1
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    if (key.startsWith('Product-')) {
       icon.innerHTML = num++
+    }
   }
 }
+
+window.onbeforeunload = CartKaNumber()
+CartKaNumber()
