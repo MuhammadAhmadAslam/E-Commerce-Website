@@ -107,3 +107,12 @@ view.addEventListener('click' , () => {
 
 let title = document.getElementById('title')
 title.innerText += `  ( ${ProductObject.products[indexNumber].title})`
+
+let icon = document.getElementById('icon')
+let num = 1
+for (let i = 0; i < localStorage.length; i++) {
+  let key = localStorage.key(i);
+  if (key.startsWith('Product-')) {
+      icon.innerHTML = num++
+  }
+}

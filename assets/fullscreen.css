@@ -360,3 +360,14 @@ ul{
     color: white !important;
     border: none !important;
 }
+.cartInNav{
+  position: relative;
+  margin-right: 26px;
+}
+#icon{
+  position: absolute;
+  top: -30%;
+}
+i:hover{
+  color: #ff3d00 !important;
+}

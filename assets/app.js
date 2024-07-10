@@ -44,7 +44,9 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                         ProductObject.products[index].images,
                         ProductObject.products[index].price
                       ]));
-                      button.innerText = 'View Cart'
+                      button.innerHTML = `Added To Cart <i class="fa-regular fa-circle-check"></i>`
+                      button.classList.add('cartBtnKaDost')
+                      button.classList.remove('cartBtn')
                       var notify = document.getElementById('notify')
                       var div = document.createElement('div')
                       div.classList.add('div')
@@ -54,17 +56,13 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                           notify.removeChild(div)
                       ],5000)
                   });
+                  if (cartBtn.innerHTML == `Added To Cart <i class="fa-regular fa-circle-check"></i>`) {
+                      console.log(true);
+                  }else{
+                    console.log(false);
+                  }
                 });
 
-      // if (button.innerText == 'View Cart') {
-      cartBtn.forEach((button , index)=>{
-            button.addEventListener('click', ()=>{
-                
-                    window.open('assets/cart.html')
-                
-      })
-      })
-    // }
 
 // button works ended here button works ended here button works ended here button works ended here
 
@@ -176,3 +174,13 @@ cardChild.forEach((cardss, index) => {
 
 })
 } 
+
+
+let icon = document.getElementById('icon')
+let num = 1
+for (let i = 0; i < localStorage.length; i++) {
+  let key = localStorage.key(i);
+  if (key.startsWith('Product-')) {
+      icon.innerHTML = num++
+  }
+}

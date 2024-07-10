@@ -364,7 +364,7 @@ ul{
     padding-right: 10px;
     font-size: 30px;
 }
-td{
+td,th{
     border-bottom: 1px solid black !important;
     padding-top: 20px !important;
     padding-bottom: 20px !important;
@@ -382,4 +382,15 @@ tr{
           height: 24px;
           font-size: 15px;
       }
+}
+.cartInNav{
+  position: relative;
+  margin-right: 26px;
+}
+#icon{
+  position: absolute;
+  top: -30%;
+}
+i:hover{
+  color: #ff3d00 !important;
 }

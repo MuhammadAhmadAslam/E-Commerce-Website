@@ -359,8 +359,15 @@ nav .logo.space{
       padding-right: 10px;
       margin-top: 10px;
 }
-#cartBtn{
+.cartBtn{
     width: 130px;
+    height: 50px;
+    border: none;
+    background-color: #171c24;
+    color: white;
+}
+.cartBtnKaDost{
+    width: 170px;
     height: 50px;
     border: none;
     background-color: #171c24;
@@ -417,4 +424,15 @@ nav .logo.space{
         width: 0px;
         transition: 6s all ease-in;
     }
+}
+.cartInNav{
+    position: relative;
+    margin-right: 26px;
+}
+#icon{
+    position: absolute;
+    top: -30%;
+}
+i:hover{
+    color: #ff3d00 !important;
 }
