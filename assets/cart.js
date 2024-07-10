@@ -83,15 +83,15 @@ function MakingCart(){
       var ArrayOfProducts = JSON.parse(localStorage.getItem(key))
       cartTable.innerHTML += `<tr>
         <td><img src='${ArrayOfProducts[2]}' width='20px' height='20px' alt='Product Image'> ${ArrayOfProducts[0]}</td>
-        <td class='amount'>${ArrayOfProducts[3]} $</td>
-        <td align='center'><input type="text" maxlength="2" class='cartInput' value='1' required></td>
+        <td><input type="text" maxlength="2" class='cartInput' value='1' required></td>
+        <td align='center' class='amount'>${ArrayOfProducts[3]} $</td>
       </tr>`;
     }
   }
   cartTable.innerHTML += `  <tr>
+  <th style="text-align:center;">Delivery Charges : 0 $</th>
             <th style="border-left: 1px solid black;">TOTAL AMOUNT</th>
-            <th id="totalAmount" style="border-right: 1px solid black;"></th>
-            <th style="text-align:center;">Delivery Charges : 0 $</th>
+            <th id="totalAmount" align='right' style="border-right: 1px solid black; text-align: center;"></th>
          </tr>`;
   
   var cartInputs = cartTable.querySelectorAll('.cartInput');
@@ -109,7 +109,7 @@ function UpdatingTotalAmount(){
   var totalAmount = 0;
   
   for (let i = 0; i < amounts.length; i++) {
-    totalAmount += parseInt(cartInputs[i].value) * parseInt(amounts[i].innerHTML);
+    totalAmount += parseFloat(cartInputs[i].value) * parseFloat(amounts[i].innerHTML);
   }
 
 

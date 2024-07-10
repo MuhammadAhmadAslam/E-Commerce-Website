@@ -58,11 +58,6 @@ for (let i = 0; i < ProductObject.products.length; i++) {
                           notify.removeChild(div)
                       ],5000)
                   });
-                  if (cartBtn.innerHTML == `Added To Cart <i class="fa-regular fa-circle-check"></i>`) {
-                      console.log(true);
-                  }else{
-                    console.log(false);
-                  }
                 });
 
 
