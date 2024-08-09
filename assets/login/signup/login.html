@@ -1,15 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Page</title>
+    <style>
+        body {
+            background-color: #171c24;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #1e232b;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 700px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 21px !important;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            font-size: 20px;
+            background-color: #171c24;
+            color: white;
+            height: 45px;
+        }
+
+        .input-group .toggle-password {
+            position: absolute;
+            top: 35px;
+            right: 10px;
+            cursor: pointer;
+            color: #ff3d00;
+        }
+
+        .login-btn {
+            background-color: #ff3d00;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background-color: #e63900;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="input-group">
+                <label for="father-name">Father's Name</label>
+                <input type="text" id="father-name" placeholder="Enter your father's name" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="" selected disabled>Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="address">Your Address</label>
+                <input type="text" id="address" placeholder="Enter your address" required>
+            </div>
+            <div class="input-group">
+                <label for="country">Your Country</label>
+                <input type="text" id="country" placeholder="Enter your country" required>
+            </div>
+            <div class="input-group">
+                <label for="city">Your City</label>
+                <input type="text" id="city" placeholder="Enter your city" required>
+            </div>
+            <div class="input-group">
+                <label for="contact-number">Contact Number</label>
+                <input type="text" id="contact-number" placeholder="Enter your contact number" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <span class="toggle-password" onclick="togglePassword()">👁️</span>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+
+
+
+
+
+    <script type="module">
+
+
+        import {
+            initializeApp,
+            getAuth,
+            createUserWithEmailAndPassword,
+            app,
+            auth,
+            onAuthStateChanged,
+            GoogleAuthProvider,
+            signInWithPopup,
+            signInWithEmailAndPassword
+        } from "../../firebase/firebase.mjs";
+
+
+        const loginBtn = document.getElementById('login-btn')
+
+        const emailInput = document.getElementById('emailInput'),
+            passwordInput = document.getElementById('passwordInput')
+
+
+        let loginFunction = (e) => {
+            e.preventDefault()
+            signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    window.location.href = '../../../index.html'
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode);
+                    console.log(errorMessage);
+                });
+        }
+
+        loginBtn.addEventListener('click', loginFunction)
+
+
+
+
+
+
+        const googleBtn = document.getElementById('google-btn')
+
+        let loginToGoogle = (e) => {
+            const provider = new GoogleAuthProvider();
+            e.preventDefault()
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    const user = result.user;
+                    console.log(user);
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    const email = error.customData.email;
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    console.log(errorCode);
+                    console.log(errorMessage);
+                });
+        }
+
+        googleBtn.addEventListener('click', loginToGoogle)
+
+        const nothaveAccount = document.getElementById('nothaveAccount')
+        nothaveAccount.addEventListener('click', (e) => {
+            e.preventDefault()
+            window.location.href = 'signup.html'
+        })
+    </script>
+
+
+
 
 
 
 
 </body>
+
 </html>

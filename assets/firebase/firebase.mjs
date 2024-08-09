@@ -1,5 +1,5 @@
   import { initializeApp  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-  import {getAuth ,  createUserWithEmailAndPassword ,onAuthStateChanged , GoogleAuthProvider , signInWithPopup} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  import {getAuth ,  createUserWithEmailAndPassword ,onAuthStateChanged , GoogleAuthProvider , signInWithEmailAndPassword ,signInWithPopup} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAcEusuBViHZG_gqw8BqABccSmVDXUvH70",
@@ -21,5 +21,6 @@
     auth,
     onAuthStateChanged ,
     GoogleAuthProvider,
-    signInWithPopup
+    signInWithPopup,
+    signInWithEmailAndPassword
   }

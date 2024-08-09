@@ -23,56 +23,30 @@ searchBtn.onclick = () => {
   cancelBtn.classList.add("show");
 }
 
-// function MakingCart(){
-// var cartTable = document.getElementById('cartTable');
-// var cartMultiplyArray = [];
-// for (let i = 0; i < localStorage.length; i++) {
-//   let key = localStorage.key(i);
-//   if (key.startsWith('Product-')) {
-//     var ArrayOfProducts = JSON.parse(localStorage.getItem(key))
-//     cartTable.innerHTML += `<tr>
-//       <td><img src='${ArrayOfProducts[2]}' width='20px' height='20px' alt='Product Image'> ${ArrayOfProducts[0]}</td>
-//       <td class='amount' id='amount'>${ArrayOfProducts[3]} $</td>
-//       <td align='center'><input type="text" maxlength="2" id="cartInput" class='cartInput' value='5'></td>
-//     </tr>`;
-//     var cartInput = document.getElementById('cartInput')
-//     cartMultiplyArray.push(cartInput.value * ArrayOfProducts[3])
-//   }
-// }
-// }
-// MakingCart()
+import {initializeApp,
+  getAuth,
+  createUserWithEmailAndPassword,
+  app,
+  auth,
+  onAuthStateChanged ,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword } from "firebase/firebase.js";
+
+  window.addEventListener('click' , (e) => {
+    e.preventDefault()
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+      } else {
+        alert('User Logoout ')
+       window.location.href = 'assets/login/signup/signup.html'
+       
+      }
+    });
+  })
 
 
-
-// function UpdatingTotalAmount(){
-// var amount = document.querySelectorAll('.amount')
-
-// var amountArray = []
-// for (let i = 0; i < amount.length; i++) {
-//       amountArray.push(amount[i].innerHTML)
-// }
-
-// var totalAmount = 0;
-
-// for (let i = 0; i < amountArray.length; i++) {
-//         amountArray[i] = parseInt(amountArray[i])
-//         totalAmount += amountArray[i];
-// }
-
-// cartTable.innerHTML += `  <tr>
-//             <th style="border-left: 1px solid black;">TOTAL AMOUNT</th>
-//             <th id="totalAmount" style="border-right: 1px solid black;"></th>
-//             <th style="text-align:center;">Delivery Charges : 0 $</th>
-//          </tr>`
-
-
-// var totalAmountTable = document.getElementById('totalAmount')
-// totalAmountTable.innerText = `${totalAmount} $`
-
-// }
-
-
-// UpdatingTotalAmount()
 
 function MakingCart(){
   var cartTable = document.getElementById('cartTable');
