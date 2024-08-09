@@ -1,6 +1,6 @@
   import { initializeApp  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-  import {getAuth ,  createUserWithEmailAndPassword ,onAuthStateChanged , GoogleAuthProvider , signInWithEmailAndPassword ,signInWithPopup} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-
+  import {sendEmailVerification , getAuth ,  createUserWithEmailAndPassword ,onAuthStateChanged , GoogleAuthProvider , signInWithEmailAndPassword ,signInWithPopup} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore.js";
   const firebaseConfig = {
     apiKey: "AIzaSyAcEusuBViHZG_gqw8BqABccSmVDXUvH70",
     authDomain: "muhammad-ahmed-demo-work.firebaseapp.com",
@@ -10,8 +10,8 @@
     appId: "1:1045072993781:web:52ac8fd8f892e73d8014bc"
   };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+ const app = initializeApp(firebaseConfig);
+ const auth = getAuth(app);
 
   export{
     initializeApp,
@@ -22,5 +22,10 @@
     onAuthStateChanged ,
     GoogleAuthProvider,
     signInWithPopup,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc ,
+    sendEmailVerification
   }

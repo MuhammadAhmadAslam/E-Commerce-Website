@@ -22,7 +22,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            width: 700px;
+            width: 300px;
             text-align: center;
         }
 
@@ -37,8 +37,7 @@
 
         .input-group label {
             display: block;
-            margin-bottom: 15px;
-            font-size: 21px !important;
+            margin-bottom: 5px;
         }
 
         .input-group input,
@@ -47,10 +46,8 @@
             padding: 10px;
             border-radius: 4px;
             border: none;
-            font-size: 20px;
             background-color: #171c24;
             color: white;
-            height: 45px;
         }
 
         .input-group .toggle-password {
@@ -74,58 +71,117 @@
         .login-btn:hover {
             background-color: #e63900;
         }
+
+        /* Add your existing styles here */
+        .hidden {
+            display: none;
+        }
+
+        .signup-btn {
+            background-color: #ff3d00;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            font-size: 19px;
+
+        }
+
+        .signup-btn:hover {
+            background-color: #e63900;
+        }
+
+        .google-btn {
+            background-color: white;
+            color: #171c24;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+
+        .google-btn:hover {
+            background-color: #f1f1f1;
+        }
+
+        .account-btn {
+            background-color: transparent;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ff3d00;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 17px;
+
+        }
+
+        .account-btn:hover {
+            background-color: #ff3d00;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
     <div class="login-container">
         <h1>Login</h1>
-        <form id="login-form">
-            <div class="input-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" placeholder="Enter your name" required>
-            </div>
-            <div class="input-group">
-                <label for="father-name">Father's Name</label>
-                <input type="text" id="father-name" placeholder="Enter your father's name" required>
-            </div>
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Enter your email" required>
-            </div>
-            <div class="input-group">
-                <label for="gender">Gender</label>
-                <select id="gender" required>
-                    <option value="" selected disabled>Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="address">Your Address</label>
-                <input type="text" id="address" placeholder="Enter your address" required>
-            </div>
-            <div class="input-group">
-                <label for="country">Your Country</label>
-                <input type="text" id="country" placeholder="Enter your country" required>
-            </div>
-            <div class="input-group">
-                <label for="city">Your City</label>
-                <input type="text" id="city" placeholder="Enter your city" required>
-            </div>
-            <div class="input-group">
-                <label for="contact-number">Contact Number</label>
-                <input type="text" id="contact-number" placeholder="Enter your contact number" required>
+                <input type="email" id="emailInput" placeholder="Enter your email" >
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
+                <input type="password" id="passwordInput" placeholder="Enter your password" >
                 <span class="toggle-password" onclick="togglePassword()">👁️</span>
             </div>
-            <button type="submit" class="login-btn">Login</button>
+            <button class="login-btn" id="login-btn">Login</button>
+            <button class="google-btn" id="google-btn" style="margin-top: 10px;">Sign In With Google</button>
+            <button class="account-btn" id="nothaveAccount">Donot Have An Account?</button>
         </form>
+
+        <div id="personal-details-form" class="hidden">
+            <h2>Personal Details</h2>
+            <form id="details-form">
+                <div class="input-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="input-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" placeholder="Enter your address" required>
+                </div>
+                <div class="input-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" placeholder="Enter your country" required>
+                </div>
+                <div class="input-group">
+                    <label for="contact-number">Contact Number</label>
+                    <input type="text" id="contact-number" placeholder="Enter your contact number" required>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+
+            </form>
+        </div>
     </div>
+
+
 
 
 
@@ -134,41 +190,45 @@
     <script type="module">
 
 
-        import {
-            initializeApp,
-            getAuth,
-            createUserWithEmailAndPassword,
-            app,
-            auth,
-            onAuthStateChanged,
-            GoogleAuthProvider,
-            signInWithPopup,
-            signInWithEmailAndPassword
+import {
+    initializeApp,
+    getAuth,
+    createUserWithEmailAndPassword,
+    app,
+    auth,
+    onAuthStateChanged ,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signInWithEmailAndPassword,
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc ,
+    sendEmailVerification
         } from "../../firebase/firebase.mjs";
-
 
         const loginBtn = document.getElementById('login-btn')
 
-        const emailInput = document.getElementById('emailInput'),
-            passwordInput = document.getElementById('passwordInput')
+        // const emailInput = document.getElementById('emailInput'),
+        //     passwordInput = document.getElementById('passwordInput')
 
 
-        let loginFunction = (e) => {
-            e.preventDefault()
-            signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    window.location.href = '../../../index.html'
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log(errorCode);
-                    console.log(errorMessage);
-                });
-        }
+        // let loginFunction = (e) => {
+        //     e.preventDefault()
+        //     signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+        //         .then((userCredential) => {
+        //             const user = userCredential.user;
+        //             window.location.href = '../../../index.html'
+        //         })
+        //         .catch((error) => {
+        //             const errorCode = error.code;
+        //             const errorMessage = error.message;
+        //             console.log(errorCode);
+        //             console.log(errorMessage);
+        //         });
+        // }
 
-        loginBtn.addEventListener('click', loginFunction)
+        // loginBtn.addEventListener('click', loginFunction)
 
 
 
@@ -203,6 +263,80 @@
             e.preventDefault()
             window.location.href = 'signup.html'
         })
+
+
+
+
+
+        loginBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+const emailInput = document.getElementById('emailInput'),
+            passwordInput = document.getElementById('passwordInput')
+
+            signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    if (!user.emailVerified) {
+                        sendEmailVerification(user)
+                            .then(() => {
+                                alert('Verification email sent. Please verify your email.');
+                            });
+                    } else {
+                        checkUserDetails(user.uid);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error signing in:", error);
+                });
+        });
+
+        function checkUserDetails(uid) {
+            const userDoc = doc(db, "userData", uid);
+            getDoc(userDoc)
+                .then((docSnap) => {
+                    if (docSnap.exists()) {
+                        alert('Welcome back!');
+                        // Redirect to your main page or do something else
+                    } else {
+                        document.getElementById('personal-details-form').classList.remove('hidden');
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching user data:", error);
+                });
+        }
+
+        document.getElementById('details-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const uid = auth.currentUser.uid;
+            const name = document.getElementById('name').value;
+            const gender = document.getElementById('gender').value;
+            const address = document.getElementById('address').value;
+            const country = document.getElementById('country').value;
+            const contactNumber = document.getElementById('contact-number').value;
+
+            setDoc(doc(db, "userData", uid), {
+                name,
+                gender,
+                address,
+                country,
+                contactNumber
+            })
+                .then(() => {
+                    alert('Personal details saved successfully.');
+                    // Redirect to your main page or do something else
+                })
+                .catch((error) => {
+                    console.error("Error saving personal details:", error);
+                });
+        });
+
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+        }
+
     </script>
 
 
