@@ -12,7 +12,9 @@ import {initializeApp,
   onAuthStateChanged ,
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithEmailAndPassword} from "../assets/firebase/firebase.mjs"
+  signInWithEmailAndPassword,
+  doc,
+  signOut} from "../assets/firebase/firebase.mjs"
 
 
 
@@ -30,15 +32,52 @@ import {initializeApp,
 
 
 
+// Optional: Close the dropdown when clicking outside of it
+document.addEventListener('click', function(event) {
+  const dropdown = document.querySelector('.dropdown');
+  const isClickInside = dropdown.contains(event.target);
+  
+  if (!isClickInside) {
+      const dropdownMenu = document.querySelector('.dropdown-menu');
+      dropdownMenu.style.display = 'none';
+  }
+});
+
+const dropdownToggle = document.querySelector('.dropdown-toggle');
+
+dropdownToggle.addEventListener('click', function(event) {
+  event.preventDefault();
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+  dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+});
+
+
+
+const logout = document.getElementById('logout')
+
+logout.addEventListener('click' , () => {
+  signOut(auth).then(() => {
+    console.log("User signed out successfully");
+    window.location.href = "assets/login/signup/login.html"; 
+}).catch((error) => {
+    console.error("Error signing out: ", error);
+});
+})
 
 
 
 
-
-
-
-
-
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    console.log('user is logged in');
+    console.log(user.displayName);
+    navbarDropdown.innerText = user.displayName
+    
+  } else {
+     console.log('user is logged out');
+  }
+});
 
 
 
@@ -59,14 +98,14 @@ for (let i = 0; i < ProductObject.products.length; i++) {
   rowDiv.innerHTML += ` <div class="card col-sm-12 col-md-6 col-lg-3">
                   <div class='cardChild'>
                   <div class="imageDiv">
-                     <img src="${product.images[0]}" alt="img" id='img'>
+                     <img src="${product.images[0]}" alt="img" id='img' loading='eager'>
                      <hr>
                   </div>
                   <div class="title">
                      <strong>${product.title}</strong>
                   </div>
                   <div class="category">
-                     <strong>Category : ${product.category}</strong>
+                     <strong>Category : <strong class='categories'>${product.category.charAt(0).toUpperCase()}${product.category.slice(1)}</strong></strong>
                   </div>
                   <div class="priceDiv">
                      <p id="price"><strong>PRICE : ${product.price} $</strong></p>
@@ -141,36 +180,45 @@ function searching() {
 
 // dropdown works started here dropdown works started here dropdown works started here 
 var dropdownArray = [];
-var select = document.getElementById('select');
-select.innerHTML = '<option selected disabled>Products</option><option value="All Products">All Products</option>'; 
+let itemsNavbar = document.getElementById('items-navbar')
+    itemsNavbar.innerHTML = `   <li class="nav-item">
+                          <a class="nav-link category-item" href="#">Home</a>
+                      </li>`
 for (const x of ProductObject.products) {
   if (!dropdownArray.includes(x.category)) {
     dropdownArray.push(x.category);
-    select.innerHTML += `<option>${x.category}</option>`;
+    itemsNavbar.innerHTML += `<li class="nav-item">
+                          <a class="nav-link category-item" href="#">${x.category.charAt(0).toUpperCase()}${x.category.slice(1)}</a>
+                      </li>`;
   }
 }
 
 
 
-var categories = document.querySelectorAll('.category')
-function dropwala() {
-  for (let i = 0; i < categories.length; i++) {
-    if (categories[i].innerText.includes(select.value)) {
-      card[i].classList.add('card')
-      card[i].classList.remove('cardsnaheMilaye')
-    }else if(select.value == 'All Products'){
-      card[i].classList.add('card')
-      card[i].classList.remove('cardsnaheMilaye')
-    } 
-    else {
-      card[i].classList.remove('card')
-      card[i].classList.add('cardsnaheMilaye')
-    }
+var categories = document.querySelectorAll('.categories')
 
-  }
-}
+let categoryItem = document.querySelectorAll('.category-item') 
 
-select.addEventListener('click', dropwala)
+categoryItem.forEach((item) => {
+    item.addEventListener('click' , () => {
+      for (let i = 0; i < categories.length; i++) {
+            if (categories[i].innerText == item.innerText) {
+              console.log(card[i]);
+                card[i].classList.add('card')
+                card[i].classList.remove('cardsnaheMilaye')
+                console.log('mil gaye');
+            }else if(item.innerText == 'Home'){
+                    card[i].classList.add('card')
+                    card[i].classList.remove('cardsnaheMilaye')                    
+            }else{
+              card[i].classList.remove('card')
+              card[i].classList.add('cardsnaheMilaye')
+            } 
+        
+      }  
+    })
+})
+
 
 // dropdown works ended here dropdown works ended here dropdown works ended here dropdown works ended here  
 
@@ -180,34 +228,8 @@ select.addEventListener('click', dropwala)
 
 
 
-// NAV BAR WORK START HERE NAV BAR WORK START HERE NAV BAR WORK START HERE NAV BAR WORK START HERE
 
-const menuBtn = document.querySelector(".menu-icon span");
-const searchBtn = document.querySelector(".search-icon");
-const cancelBtn = document.querySelector(".cancel-icon");
-const items = document.querySelector(".nav-items");
-const form = document.querySelector("form");
-menuBtn.onclick = () => {
-  items.classList.add("active");
-  menuBtn.classList.add("hide");
-  searchBtn.classList.add("hide");
-  cancelBtn.classList.add("show");
-}
-cancelBtn.onclick = () => {
-  items.classList.remove("active");
-  menuBtn.classList.remove("hide");
-  searchBtn.classList.remove("hide");
-  cancelBtn.classList.remove("show");
-  form.classList.remove("active");
-  cancelBtn.style.color = "#ff3d00";
-}
-searchBtn.onclick = () => {
-  form.classList.add("active");
-  searchBtn.classList.add("hide");
-  cancelBtn.classList.add("show");
-}
 
-// NAV BAR WORK ENDED HERE NAV BAR WORK ENDED HERE NAV BAR WORK ENDED HERE NAV BAR WORK ENDED HERE NAV BAR WORK ENDED HERE
 
 
 
@@ -226,17 +248,17 @@ cardChild.forEach((cardss, index) => {
 })
 } 
 
-function CartKaNumber(){
+// function CartKaNumber(){
 
-  let icon = document.getElementById('icon')
-  let num = 1
-  for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
-    if (key.startsWith('Product-')) {
-      icon.innerHTML = num++
-    }
-  }
-}
+//   let icon = document.getElementById('icon')
+//   let num = 1
+//   for (let i = 0; i < localStorage.length; i++) {
+//     let key = localStorage.key(i);
+//     if (key.startsWith('Product-')) {
+//       icon.innerHTML = num++
+//     }
+//   }
+// }
 
-window.onbeforeunload = CartKaNumber()
-CartKaNumber()
+// window.onbeforeunload = CartKaNumber()
+// CartKaNumber()
